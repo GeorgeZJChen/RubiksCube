@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="rubik.css">
   </head>
   <body>
-    <div class="" id="fix_screen_width" style="position:relative;overflow:hidden">
+    <div class="" id="fix_screen_width" style="height: 500px;position:relative;overflow:hidden">
     <div class=""style="margin: auto;top:20px;left:20px;width:250px;">
       <button id="random_rotate" style="width: 40%; height: 100%;display: inline-block;margin-right:20px">Rotate Randomly</button>
       <button id="random_rotate_2" style="width: 40%; height: 100%;margin-right:0px">Rotate Randomly (Fast)</button>
@@ -296,7 +296,7 @@
     </div>
     <script type="text/javascript">
     ;(function(){
-      document.getElementById('fix_screen_width').style.width = document.body.scrollTop
+      document.getElementById('fix_screen_width').style.width = document.body.clientWidth
     })()
 
     </script>

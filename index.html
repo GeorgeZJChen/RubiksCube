@@ -9,7 +9,11 @@
   </head>
   <body>
     <div class="" id="fix_screen_width" style="height: 500px;position:relative;overflow:hidden">
-    <div class=""style="margin: auto;top:20px;left:20px;width:250px;">
+    <div class="" style="position:absolute;font-size:14px;top:20px;left:10px;">
+      <input type="checkbox" id="colour_switch" checked='checked'><label for="colour">Colour</label>
+
+    </div>
+    <div class=""style="margin: auto;top:20px;left:20px;width:250px;font-size:12px;">
       <button id="random_rotate" style="width: 40%; height: 100%;display: inline-block;margin-right:20px">Rotate Randomly</button>
       <button id="random_rotate_2" style="width: 40%; height: 100%;margin-right:0px">Rotate Randomly (Fast)</button>
     </div>
@@ -23,7 +27,7 @@
         <div id="rotate_layer_control_button"></div>
       </div>
 
-      <div class="rubik" id="rubiks_cube" style="transform: rotateX(-15.01deg) rotateY(-15.23deg);">
+      <div class="rubik rubik-coloured" id="rubiks_cube" style="transform: rotateX(-15.01deg) rotateY(-15.23deg);">
         <div class="temp-class">
         </div>
         <div class="temp-class"style="background: #a27777;transform: rotateY(0deg)translateX(100px)">

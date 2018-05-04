@@ -66,6 +66,16 @@
     state[i-1] = i
   }
 
+  document.getElementById('colour_switch').addEventListener('click', function(e){
+    var cube = document.getElementById('rubiks_cube')
+    if(this.checked){
+      if(cube.className.indexOf('rubik-coloured')==-1)
+        cube.className += ' rubik-coloured'
+    }else {
+      cube.className = cube.className.replace(' rubik-coloured', '')
+    }
+  })
+
   document.getElementById('random_rotate').addEventListener('click', function(){
     rotate_cubies(['x','y','z'][Math.floor(Math.random()*3)],
     Math.floor(Math.random()*3)+1, Math.floor(Math.random()*2))
@@ -155,8 +165,16 @@
   }
 
   var mousedown_1 = function(e){
-    var x = e.clientX || e.changedTouches[0].clientX,
-        y = e.clientY || e.changedTouches[0].clientY;
+    try {
+      var x = e.clientX || e.changedTouches[0].clientX || undefined,
+        y = e.clientY || e.changedTouches[0].clientY || undefined;
+    } catch (e) {
+      x = undefined
+      y = undefined
+    } finally {
+
+    }
+    if(x==undefined||y==undefined) return
     var a = control_layer_button;
     var top = a.offsetTop
     var left = a.offsetLeft
@@ -184,8 +202,16 @@
     var which
 
     var move = function (e) { //mousemove
-      var mx = e.clientX || e.changedTouches[0].clientX,
-          my = e.clientY || e.changedTouches[0].clientY;
+      try {
+        var mx = e.clientX || e.changedTouches[0].clientX || undefined,
+          my = e.clientY || e.changedTouches[0].clientY || undefined;
+      } catch (e) {
+        mx = undefined
+        my = undefined
+      } finally {
+
+      }
+      if(mx==undefined||my==undefined) return
       if(!moved&&Math.abs(mx-x)<3&&Math.abs(my-y)<3) return;
 
       deltaX = mx-x
@@ -370,8 +396,15 @@
   })
 
   var mousedown_2 = function(e){
-    var x = e.clientX || e.changedTouches[0].clientX,
-        y = e.clientY || e.changedTouches[0].clientY;
+    try {
+      var x = e.clientX || e.changedTouches[0].clientX || undefined,
+        y = e.clientY || e.changedTouches[0].clientY || undefined;
+    } catch (e) {
+      x = undefined
+      y = undefined
+    } finally {
+    }
+    if(x==undefined||y==undefined) return
     var a = control_area;
     var top = 0;
     var left = 0;
@@ -417,8 +450,16 @@
 
     }
     var move = function (e) { //mousemove
-      var mx = e.clientX || e.changedTouches[0].clientX,
-          my = e.clientY || e.changedTouches[0].clientY;
+      try {
+        var mx = e.clientX || e.changedTouches[0].clientX || undefined,
+          my = e.clientY || e.changedTouches[0].clientY || undefined;
+      } catch (e) {
+        mx = undefined
+        my = undefined
+      } finally {
+
+      }
+      if(mx==undefined||my==undefined) return
       if(!moved&&Math.abs(mx-x)<3&&Math.abs(my-y)<3) return;
 
       button_pos = [mx-8, my-8];
@@ -495,7 +536,22 @@
 
     get_current_position()
     var axes = ['x', 'y', 'z']
-    var p
+    var p = 0
+    var pre_axes = 'xyz'
+    var dup_axis_pos
+    for (var i = 0; i < 3; i++) {
+      pre_axes = pre_axes.replace(position[i][0],'')
+    }
+    if(pre_axes.length==1){
+      var temp
+      for (var i = 0; i < position.length; i++) {
+        if(temp == position[i][0]){
+          position[i][0] = pre_axes[0]
+          break
+        }
+        temp = position[i][0]
+      }
+    }
     for (var i = 0; i < 3; i++) {
       if(position[i][0] == axis){
         p = i

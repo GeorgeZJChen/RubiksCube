@@ -5,6 +5,7 @@ body{
   overflow: hidden;
   font-size: 0;
   background-color: rgb(205, 229, 243);
+  user-select: none;
 }
 .temp-class{
   width: 303px;
@@ -123,4 +124,25 @@ body{
   box-shadow: 0 0 6px 1px #888;
   border-radius: 50%;
   transition: all cubic-bezier(0, 0, 0.15, 0.85) 0.2s;
+}
+.rubik.rubik-coloured{
+  font-size: 0;
+}
+.rubik.rubik-coloured .faces-1{
+  background-color: rgba(0, 162, 234, 0.8);
+}
+.rubik.rubik-coloured .faces-2{
+  background-color: rgba(255, 241, 0, 0.8);
+}
+.rubik.rubik-coloured .faces-3{
+  background-color: rgba(231, 33, 41, 0.8);
+}
+.rubik.rubik-coloured .faces-4{
+  background-color: rgba(0, 154, 75, 0.8);
+}
+.rubik.rubik-coloured .faces-5{
+  background-color: rgba(255, 250, 244, 0.8);
+}
+.rubik.rubik-coloured .faces-6{
+  background-color: rgba(240, 133, 25, 0.9);
 }

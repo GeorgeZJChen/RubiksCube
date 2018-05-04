@@ -366,7 +366,7 @@
 
   control_button.addEventListener('dblclick', function(e){
     var rubik = document.getElementById('rubiks_cube');
-    rubik.style.transform = "rotateX("+ -9.5 +"deg) rotateY("+ -25 +"deg)";
+    rubik.style.transform = "rotateX("+ -10.5 +"deg) rotateY("+ -15 +"deg)";
   })
 
   var mousedown_2 = function(e){

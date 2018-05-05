@@ -50,7 +50,7 @@
   t_div.innerHTML = browser
   document.body.appendChild(t_div)
 
-  if(browser.indexOf('Safari')!=-1){
+  if(browser.indexOf('Safari')!=-1||browser.indexOf('Netscape')!=-1){
     for (var i = 0; i < translations.length; i++) {
       translations[i][2] = 0
     }

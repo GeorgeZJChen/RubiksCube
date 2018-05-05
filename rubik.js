@@ -51,7 +51,7 @@
   document.body.appendChild(t_div)
 
   if(browser.indexOf('Safari')!=-1||browser.indexOf('Netscape')!=-1||browser.indexOf('iPhone')!=-1){
-    t_div = ‘Netscape or iPhone’
+    t_div = 'Netscape or iPhone'
     for (var i = 0; i < translations.length; i++) {
       translations[i][2] = 0
     }

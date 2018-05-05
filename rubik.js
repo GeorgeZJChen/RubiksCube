@@ -45,10 +45,6 @@
                         [-1, 0, 0],
                     ]
   var browser = getBrowser()
-  var t_div = document.createElement('div')
-  t_div.setAttribute('style', 'width:100px; margin:auto;font-size:20px;color:red;')
-  t_div.innerHTML = browser
-  document.body.appendChild(t_div)
 
   if(browser.indexOf('Safari')!=-1||browser.indexOf('Netscape')!=-1||browser.indexOf('iPhone')!=-1){
     t_div.innerHTML = 'Netscape or iPhone'
@@ -64,8 +60,10 @@
     return
   }
   if(browser.indexOf('Edge')!=-1){
-
-    return
+    var link = document.createElement('link')
+    link.setAttribute('rel', 'stylesheet')
+    link.setAttribute('href', 'rubik.edge.css')
+    document.head.appendChild(link)
   }
   var origins = [
                   [60, 60, -40,], //1

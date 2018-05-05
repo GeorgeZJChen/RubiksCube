@@ -113,8 +113,10 @@
     var mouseup = function(){
       go = false
       document.removeEventListener('touchend', mouseup)
+      document.removeEventListener('touchcancel', mouseup)
     }
     document.addEventListener('touchend', mouseup)
+    document.addEventListener('touchcancel', mouseup)
     ;(function(){
       if(go==undefined){
         go = true
@@ -369,6 +371,7 @@
       document.removeEventListener("mouseup", up, false);
       document.removeEventListener("touchmove", move, false);
       document.removeEventListener("touchend", up, false);
+      document.removeEventListener("touchcancel", up, false);
       control_layer_button.removeAttribute('style')
       moved = false;
       var cubies = document.getElementsByClassName('cubie')
@@ -385,6 +388,7 @@
     document.addEventListener("mouseup", up, false);
     document.addEventListener("touchmove", move, false);
     document.addEventListener("touchend", up, false);
+    document.addEventListener("touchcancel", up, false);
   }
 
   control_layer_button.addEventListener('mousedown', mousedown_1)
@@ -392,7 +396,7 @@
 
   control_button.addEventListener('dblclick', function(e){
     var rubik = document.getElementById('rubiks_cube');
-    rubik.style.transform = "rotateX("+ -10.5 +"deg) rotateY("+ -15 +"deg)";
+    rubik.setAttribute('style', transform_prefix("rotateX("+ -10.5 +"deg) rotateY("+ -15 +"deg)"))
   })
 
   var mousedown_2 = function(e){
@@ -438,12 +442,11 @@
       var transform = rubik.style.transform
       var rotateX = parseInt(transform.match(/rotate[XYZ]\(([^\)]*)deg\)/)[1]);
       var rotateY = parseInt(transform.match(/deg.*rotate[XYZ]\(([^\)]*)deg\)/)[1]);
-      rubik.style.transition = "";
       (function(){
         if(go){
           rotateX += velocity_y *3;
           rotateY += velocity_x *3;
-          rubik.style.transform = "rotateX("+ rotateX.toFixed(2) +"deg) rotateY("+ rotateY.toFixed(2) +"deg)"
+          rubik.setAttribute('style', transform_prefix("rotateX("+ rotateX.toFixed(2) +"deg) rotateY("+ rotateY.toFixed(2) +"deg)"))
           setTimeout(arguments.callee, 20)
         }
       })()
@@ -509,6 +512,7 @@
       document.removeEventListener("mouseup", up, false);
       document.removeEventListener("touchmove", move, false);
       document.removeEventListener("touchend", up, false);
+      document.removeEventListener("touchcancel", up, false);
       control_button.removeAttribute('style');
       moved = false;
       go = false;
@@ -517,6 +521,7 @@
     document.addEventListener("mouseup", up, false);
     document.addEventListener("touchmove", move, false);
     document.addEventListener("touchend", up, false);
+    document.addEventListener("touchcancel", up, false);
 
     if(Math.pow(x-left -26-btn_left, 2) + Math.pow(y-top -26-btn_top, 2) > 400){
       moved = true;
@@ -605,13 +610,13 @@
       cubies[i] = document.getElementById(id_prefix+ids[i])
     }
     for (var i = 0; i < cubies.length; i++) {
-      var style = cubies[i].getAttribute('style').replace(/rotate3d[^;]*/, 'rotate3d('+axis_n+dir_n+')')
+      var style = cubies[i].getAttribute('style').replace(/rotate3d[^;]*/g, 'rotate3d('+axis_n+dir_n+')')
       cubies[i].setAttribute('style', style)
     }
     setTimeout(function(){
       var setTimeout_p = function(p){
         setTimeout(function(){
-          p.style.transition = ''
+          p.setAttribute('style', p.getAttribute('style').replace(/transition.*no;/, ''))
           rotating = false
         },30)
       }
@@ -622,8 +627,9 @@
           translate[j] = translate[j]*40 + 'px'
           origin[j] = origin[j] + 'px'
         }
-        cubies[i].setAttribute('style', 'transform:translate3d('+translate.join(',')+')rotate3d(0,0,0,0deg);transform-origin:'+origin.join(' ')+';transition:no')
-
+        cubies[i].setAttribute('style', transform_prefix('translate3d('+translate.join(',')+')rotate3d(0,0,0,0deg)')
+          +';transform-origin:'+origin.join(' ')+';-webkit-transform-origin:'+origin.join(' ')
+          +';transition:no;-webkit-transition:no;')
         //faces turning
         var turn;
         if(axis == 'x')
@@ -776,6 +782,10 @@
       extra = undefined
     arr.push(extra)
     return arr
+  }
+
+  var transform_prefix = function(transform, add_head){
+      return 'transform:'+transform+';'+'-webkit-transform:'+transform
   }
 
 })()

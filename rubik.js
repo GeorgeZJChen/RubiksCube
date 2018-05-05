@@ -46,7 +46,7 @@
                     ]
   var browser = getBrowser()
 
-  if(browser.indexOf('Safari')!=-1||browser.indexOf('Netscape')!=-1||browser.indexOf('iPhone')!=-1){
+  if(browser.indexOf('Safari')!=-1||browser.indexOf('Netscape')!=-1){
     for (var i = 0; i < translations.length; i++) {
       translations[i][2] = 0
     }
@@ -114,7 +114,7 @@
     }
     html += "<div class='cubie' id="+id_prefix+(i+1)+" style='"
       + transform_prefix("translate3d("+translate.join(',')+")rotate3d(0,0,0,0deg)")
-      + "transform-origin:"+origin.join(' ')+";-webkit-transform-origin:"+origin.join(' ')+";'>";
+      + ";transform-origin:"+origin.join(' ')+";-webkit-transform-origin:"+origin.join(' ')+";'>";
     var num_pos = 7
     if(i<=8) num_pos = 0
     else if(i<=14) num_pos = 1
@@ -137,13 +137,16 @@
     state[b-1] = b
   }
 
-  document.getElementById('colour_switch').addEventListener('click', function(e){
+  document.getElementById('colour_switch').addEventListener('change', function(e){
     var cube = document.getElementById('rubiks_cube')
     if(this.checked){
-      if(cube.className.indexOf('rubik-coloured')==-1)
+      if(cube.className.indexOf('rubik-coloured')==-1){
         cube.className += ' rubik-coloured'
+        document.getElementById('colour_switch_present').checked = true
+      }
     }else {
       cube.className = cube.className.replace(' rubik-coloured', '')
+      document.getElementById('colour_switch_present').checked = false
     }
   })
 

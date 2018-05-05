@@ -1,167 +1,20 @@
-body{
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  overflow: hidden;
-  font-size: 0;
-  background-color: rgb(205, 229, 243);
-  user-select: none;
-  -ms-user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-}
-.temp-class{
-  width: 303px;
-    height: 1px;
-    background: black;
-    -webkit-transform: rotateY(-90deg)translateX(100px);
-            transform: rotateY(-90deg)translateX(100px);
-    pointer-events: none
-}
-.container{
-  -webkit-perspective: 800px;
-          perspective: 800px;
-  -ms-user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
-  position: relative;
-  margin: auto;
-  width: 1px;
-}
 .rubik{
-  font-size: 16px;
-  position: absolute;
-  top: 100px;
-  left: -50px;
-  -webkit-transform-style: preserve-3d;
-          transform-style: preserve-3d;
-  width: 40px;
-  height: 40px;
-  -webkit-transform-origin: center;
-          transform-origin: center;
   -webkit-transition: no !important;
   transition: no !important;
 }
-
-.cubie{
-  position: absolute;
-  -webkit-transform-origin: center;
-          transform-origin: center;
-  -webkit-transform-style: preserve-3d;
-          transform-style: preserve-3d;
-  -webkit-transition: -webkit-transform ease-out 0.5s;
-  transition: -webkit-transform ease-out 0.5s;
-  transition: transform ease-out 0.5s;
-  transition: transform ease-out 0.5s, -webkit-transform ease-out 0.5s;
-}
-.cubie.cubie-selected .cubie-faces{
-  box-shadow: 0 0 3px 3px #fff;
-}
-.cubie-inner{
-  position: absolute;
-  -webkit-transform-origin: 20px 20px 0px;
-          transform-origin: 20px 20px 0px;
-  -webkit-transform-style: preserve-3d;
-          transform-style: preserve-3d;
-}
 .cubie-faces{
-  position: absolute;
-  text-align: center;
-  line-height: 250%;
-  width: 40px;
-  height: 40px;
-  background-color: rgba(136, 136, 136, 0.53);
   outline: unset;
 }
 
-#rotate_control_area{
-  position: absolute;
-  top: 300px;
-  left: -150px;
-  width: 100px;
-  height: 100px;
-  box-shadow: 0 0 5px 1px #000;
-  border-radius: 50%;
-  z-index: 100;
-}
 #rotate_control_button{
-  position: absolute;
-  background: #d4d4d4;
-  top: 30px;
-  left: 30px;
-  height: 40px;
-  width: 40px;
-  box-shadow: 0 0 6px 1px #888;
-  border-radius: 50%;
   -webkit-transition: no !important;
   transition: no !important;
 }
 .stall{
-  width: 50px;
-  height: 50px;
-  border: 0px solid #000;
-  box-sizing: border-box;
-  display: inline-block;
-  margin: 0;
-  -webkit-transition: all ease-out 0.3s;
-  transition: all ease-out 0.3s;
-  box-shadow: 0 0 3px 1px #888;
-  border-radius: 50%;
-}
-.stall:nth-child(1){
-  position: absolute;
-  width: 2px;
-  left: 50%;
-  height: 100%;
-  background: #000;
-}
-.stall:nth-child(2){
-  position: absolute;
-  margin: auto;
-  height: 2px;
-  width: 100%;
-  top: 50%;
-  background: #000;
-}
-#rotate_layer_control{
-  width: 100px;
-  height: 100px;
-  position: relative;
-  top:300px;
-  left:50px;
-  z-index: 100;
-}
-#rotate_layer_control_button{
-  position: absolute;
-  background: #d4d4d4;
-  top: 35px;
-  left: 35px;
-  height: 30px;
-  width: 30px;
-  box-shadow: 0 0 6px 1px #888;
-  border-radius: 50%;
   -webkit-transition: no !important;
   transition: no !important;
 }
-.rubik.rubik-coloured{
-  font-size: 0;
-}
-.rubik.rubik-coloured .faces-1{
-  background-color: rgba(0, 162, 234, 0.8);
-}
-.rubik.rubik-coloured .faces-2{
-  background-color: rgba(255, 241, 0, 0.8);
-}
-.rubik.rubik-coloured .faces-3{
-  background-color: rgba(231, 33, 41, 0.8);
-}
-.rubik.rubik-coloured .faces-4{
-  background-color: rgba(0, 154, 75, 0.8);
-}
-.rubik.rubik-coloured .faces-5{
-  background-color: rgba(255, 250, 244, 0.8);
-}
-.rubik.rubik-coloured .faces-6{
-  background-color: rgba(240, 133, 25, 0.9);
+#rotate_layer_control_button{
+  -webkit-transition: no !important;
+  transition: no !important;
 }

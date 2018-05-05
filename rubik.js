@@ -14,10 +14,6 @@
       if((tem= ua.match(/version\/(\d+)/i))!= null) M.splice(1, 1, tem[1]);
       return M.join(' ');
     }
-  var browser = getBrowser()
-  var control_area = document.getElementById('rotate_control_area');
-  var control_button = document.getElementById('rotate_control_button');
-  var control_layer_button = document.getElementById('rotate_layer_control_button');
 
   var id_prefix = 'isb9qalC_'
   var translations = [
@@ -48,12 +44,10 @@
                         [0, 1, 0], //25
                         [-1, 0, 0],
                     ]
-    console.log(browser)
-  if(browser.indexOf('Safari')!=-1){
+  if(getBrowser().indexOf('safari')!=-1){
     for (var i = 0; i < translations.length; i++) {
       translations[i][2] = 0
     }
-    console.log(translations);
   }
   var origins = [
                   [60, 60, -40,], //1
@@ -83,6 +77,46 @@
                   [20, -20, 0,], //25
                   [60, 20, 0,],
                 ]
+
+  var transform_prefix = function(transform, add_head){
+      return 'transform:'+transform+';'+'-webkit-transform:'+transform
+  }
+  var html = ''
+  var inner_faces = [
+    '<div class="cubie-faces faces-1" style="transform:translate3d(0px, 0px, 20px);-webkit-transform:translate3d(0px, 0px, 20px);">',
+    '<div class="cubie-faces faces-2" style="transform:translate3d(0px, -20px, 0px) rotateX(90deg);-webkit-transform:translate3d(0px, -20px, 0px) rotateX(90deg);">',
+    '<div class="cubie-faces faces-3" style="transform:translate3d(20px, 0px, 0px) rotateY(90deg);-webkit-transform:translate3d(20px, 0px, 0px) rotateY(90deg);">',
+    '<div class="cubie-faces faces-4" style="transform:translate3d(0px, 0px, -20px);-webkit-transform:translate3d(0px, 0px, -20px);">',
+    '<div class="cubie-faces faces-5" style="transform:translate3d(0px, 20px, 0px) rotateX(90deg);-webkit-transform:translate3d(0px, 20px, 0px) rotateX(90deg);">',
+    '<div class="cubie-faces faces-6" style="transform:translate3d(-20px, 0px, 0px) rotateY(90deg);-webkit-transform:translate3d(-20px, 0px, 0px) rotateY(90deg);">'
+  ]
+  for (var i = 0; i < 26; i++) {
+    var translate = translations[i].slice()
+    var origin = origins[i].slice()
+    for (var j = 0; j < 3; j++) {
+      translate[j] = translate[j]*40 + 'px'
+      origin[j] = origin[j] + 'px'
+    }
+    html += "<div class='cubie' id="+id_prefix+(i+1)+" style='"
+      + transform_prefix("translate3d("+translate.join(',')+")rotate3d(0,0,0,0deg)")
+      + "transform-origin:"+origin.join(' ')+";-webkit-transform-origin:"+origin.join(' ')+";'>";
+    var num_pos = 7
+    if(i<=8) num_pos = 0
+    else if(i<=14) num_pos = 1
+    else if(i<=18) num_pos = 2
+    else if(i<=22) num_pos = 3
+    else if(i<=24) num_pos = 4
+    else num_pos = 5
+
+    for (var k = 0; k < 6; k++) {
+      var t = ''
+      if(k==num_pos) t = ''+(i+1)
+      html += inner_faces[k] + t +'</div>'
+    }
+    html += '</div>'
+  }
+  document.getElementById('rubiks_cube').innerHTML += html
+
   var state = []
   for (var i = 1; i <= 26; i++) {
     state[i-1] = i
@@ -153,6 +187,9 @@
     return
   })
 
+  var control_area = document.getElementById('rotate_control_area')
+  var control_button = document.getElementById('rotate_control_button')
+  var control_layer_button = document.getElementById('rotate_layer_control_button')
 
   var cubies = document.getElementsByClassName('cubie')
   var selected_ids = []
@@ -804,10 +841,6 @@
       extra = undefined
     arr.push(extra)
     return arr
-  }
-
-  var transform_prefix = function(transform, add_head){
-      return 'transform:'+transform+';'+'-webkit-transform:'+transform
   }
 
 

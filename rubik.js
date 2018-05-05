@@ -48,10 +48,11 @@
                         [0, 1, 0], //25
                         [-1, 0, 0],
                     ]
-  if(browser.indexOf('safari')!=-1){
+  if(browser.indexOf('Safari')!=-1){
     for (var i = 0; i < translations.length; i++) {
       translations[i][2] = 0
     }
+    console.log(translations);
   }
   var origins = [
                   [60, 60, -40,], //1

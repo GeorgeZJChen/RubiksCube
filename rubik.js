@@ -370,11 +370,26 @@
       if(stage_2=='unset'){
         stalls[0].style.left = stalls_pos[0][0] +deltaX +'px'
         stalls[1].style.top = stalls_pos[1][1] +deltaY +'px'
+        if(stage_1 == 'x'){
+          stalls[0].style.transform = 'scaleY(0.6)'
+          stalls[1].style.transform = ''
+        }
+        else if(stage_1 == 'y'){
+          stalls[1].style.transform = 'scaleX(0.6)'
+          stalls[0].style.transform = ''
+        } else {
+          stalls[0].style.transform = ''
+          stalls[1].style.transform = ''
+        }
       }else {
-        if(stage_1=='x')
+        if(stage_1=='x'){
+          stalls[0].style.transform = ''
           stalls[0].style.left = stalls_pos[0][0] + deltaX +'px'
-        else
+        }
+        else{
+          stalls[1].style.transform = ''
           stalls[1].style.top = stalls_pos[1][1] + deltaY +'px'
+        }
       }
 
       var s = [left + deltaX, top + deltaY]

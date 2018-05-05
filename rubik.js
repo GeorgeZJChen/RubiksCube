@@ -48,6 +48,7 @@
                         [0, 1, 0], //25
                         [-1, 0, 0],
                     ]
+    console.log(browser)
   if(browser.indexOf('Safari')!=-1){
     for (var i = 0; i < translations.length; i++) {
       translations[i][2] = 0

@@ -178,6 +178,7 @@ body{
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  background: #6e7377;
 }
 .btn-option{
   -webkit-box-flex: 1;
@@ -188,9 +189,9 @@ body{
   height: 100%;
   font-size:16px;
   text-align: center;
-  margin: 0 1px;
+  margin-left: 1px;
   vertical-align: top;
-  background: rgb(37,40,43);
+  background: rgb(55,59,62);
 
 }
 .btn-option:first-child(1){

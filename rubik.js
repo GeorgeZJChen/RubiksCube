@@ -44,7 +44,7 @@
                         [0, 1, 0], //25
                         [-1, 0, 0],
                     ]
-  if(getBrowser().indexOf('safari')!=-1){
+  if(getBrowser().indexOf('Safari')!=-1){
     for (var i = 0; i < translations.length; i++) {
       translations[i][2] = 0
     }

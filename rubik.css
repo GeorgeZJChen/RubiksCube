@@ -14,13 +14,11 @@ body{
   width: 303px;
     height: 1px;
     background: black;
-    -webkit-transform: rotateY(-90deg)translateX(100px);
-            transform: rotateY(-90deg)translateX(100px);
+    transform: rotateY(-90deg)translateX(100px);
     pointer-events: none
 }
 .container{
-  -webkit-perspective: 800px;
-          perspective: 800px;
+  perspective: 800px;
   -ms-user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -34,38 +32,26 @@ body{
   position: absolute;
   top: 100px;
   left: -50px;
-  -webkit-transform-style: preserve-3d;
-          transform-style: preserve-3d;
+  transform-style: preserve-3d;
   width: 40px;
   height: 40px;
-  -webkit-transform-origin: center;
-          transform-origin: center;
-  -webkit-transition: -webkit-transform ease-out 0.3s;
-  transition: -webkit-transform ease-out 0.3s;
-  transition: transform ease-out 0.3s;
-  transition: transform ease-out 0.3s, -webkit-transform ease-out 0.3s
+  transform-origin: center;
+  transition: transform ease-out 0.3s
 }
 
 .cubie{
   position: absolute;
-  -webkit-transform-origin: center;
-          transform-origin: center;
-  -webkit-transform-style: preserve-3d;
-          transform-style: preserve-3d;
-  -webkit-transition: -webkit-transform ease-out 0.5s;
-  transition: -webkit-transform ease-out 0.5s;
+  transform-origin: center;
+  transform-style: preserve-3d;
   transition: transform ease-out 0.5s;
-  transition: transform ease-out 0.5s, -webkit-transform ease-out 0.5s;
 }
 .cubie.cubie-selected .cubie-faces{
   box-shadow: 0 0 3px 3px #fff;
 }
 .cubie-inner{
   position: absolute;
-  -webkit-transform-origin: 20px 20px 0px;
-          transform-origin: 20px 20px 0px;
-  -webkit-transform-style: preserve-3d;
-          transform-style: preserve-3d;
+  transform-origin: 20px 20px 0px;
+  transform-style: preserve-3d;
 }
 .cubie-faces{
   position: absolute;
@@ -96,7 +82,6 @@ body{
   width: 40px;
   box-shadow: 0 0 6px 1px #888;
   border-radius: 50%;
-  -webkit-transition: all cubic-bezier(0, 0, 0.15, 0.85) 0.2s;
   transition: all cubic-bezier(0, 0, 0.15, 0.85) 0.2s;
 }
 .stall{
@@ -106,7 +91,6 @@ body{
   box-sizing: border-box;
   display: inline-block;
   margin: 0;
-  -webkit-transition: all ease-out 0.3s;
   transition: all ease-out 0.3s;
   box-shadow: 0 0 3px 1px #888;
   border-radius: 50%;
@@ -143,7 +127,6 @@ body{
   width: 30px;
   box-shadow: 0 0 6px 1px #888;
   border-radius: 50%;
-  -webkit-transition: all cubic-bezier(0, 0, 0.15, 0.85) 0.2s;
   transition: all cubic-bezier(0, 0, 0.15, 0.85) 0.2s;
 }
 .rubik.rubik-coloured{

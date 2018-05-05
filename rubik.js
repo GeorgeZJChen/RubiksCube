@@ -1,5 +1,20 @@
 (function(){
-
+  var getBrowser = function(){
+      var ua= navigator.userAgent, tem,
+      M= ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+      if(/trident/i.test(M[1])){
+        tem=  /\brv[ :]+(\d+)/g.exec(ua) || [];
+        return 'IE '+(tem[1] || '');
+      }
+      if(M[1]=== 'Chrome'){
+        tem= ua.match(/\b(OPR|Edge)\/(\d+)/);
+        if(tem!= null) return tem.slice(1).join(' ').replace('OPR', 'Opera');
+      }
+      M= M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?'];
+      if((tem= ua.match(/version\/(\d+)/i))!= null) M.splice(1, 1, tem[1]);
+      return M.join(' ');
+    }
+  var browser = getBrowser()
   var control_area = document.getElementById('rotate_control_area');
   var control_button = document.getElementById('rotate_control_button');
   var control_layer_button = document.getElementById('rotate_layer_control_button');
@@ -33,6 +48,11 @@
                         [0, 1, 0], //25
                         [-1, 0, 0],
                     ]
+  if(browser.indexOf('safari')!=-1){
+    for (var i = 0; i < translations.length; i++) {
+      translations[i][2] = 0
+    }
+  }
   var origins = [
                   [60, 60, -40,], //1
                   [20, 60, -40,],
@@ -641,7 +661,7 @@
         if(!direction)
           turn.reverse()
 
-        var faces = cubies[i].children[0].children
+        var faces = cubies[i].children
         var temp_class = faces[turn[3]-1].className
         var temp_html = faces[turn[3]-1].innerHTML
         for (var m = 3; m >=1; m--) {
@@ -787,5 +807,6 @@
   var transform_prefix = function(transform, add_head){
       return 'transform:'+transform+';'+'-webkit-transform:'+transform
   }
+
 
 })()

@@ -44,10 +44,27 @@
                         [0, 1, 0], //25
                         [-1, 0, 0],
                     ]
-  if(getBrowser().indexOf('Safari')!=-1){
+  var browser = getBrowser()
+  var t_div = document.createElement('div')
+  t_div.setAttribute('style', 'width:100px; margin:auto;font-size:20px;color:red;')
+  t_div.innerHTML = browser
+  document.body.appendChild(t_div)
+
+  if(browser.indexOf('Safari')!=-1){
     for (var i = 0; i < translations.length; i++) {
       translations[i][2] = 0
     }
+  }
+  if(browser.indexOf('IE')!=-1){
+    var t_div = document.createElement('div')
+    t_div.setAttribute('style', 'margin:auto;font-size:20px;color:red;padding-top:50px')
+    t_div.innerHTML = 'Does not support IE'
+    document.body.appendChild(t_div)
+    return
+  }
+  if(browser.indexOf('Edge')!=-1){
+
+    return
   }
   var origins = [
                   [60, 60, -40,], //1
@@ -118,8 +135,8 @@
   document.getElementById('rubiks_cube').innerHTML += html
 
   var state = []
-  for (var i = 1; i <= 26; i++) {
-    state[i-1] = i
+  for (var b = 1; b <= 26; b++) {
+    state[b-1] = b
   }
 
   document.getElementById('colour_switch').addEventListener('click', function(e){

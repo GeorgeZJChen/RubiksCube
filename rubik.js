@@ -15,6 +15,10 @@
       return M.join(' ');
     }
 
+  document.body.addEventListener('touchmove', function(e){
+    e.preventDefault()
+  })
+  
   var id_prefix = 'isb9qalC_'
   var rotate_path = []
   var translations = [

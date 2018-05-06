@@ -212,7 +212,14 @@
     if(begin_len>3){
       progress_bar.style.opacity = 1
     }
+    var first_in = true
     ;(function(){
+      if(first_in){
+        progress_bar.style.left = '-100%'
+        first_in = false
+        setTimeout(arguments.callee, 700)
+        return
+      }
       if(rotate_path.length>0){
         var percentage = (rotate_path.length-1)/begin_len
         progress_bar.style.left = '-'+ (percentage*100).toFixed(2) +'%'

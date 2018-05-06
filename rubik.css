@@ -9,6 +9,7 @@ body{
   -ms-user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
+  -webkit-overflow-scrolling: touch;
 }
 .temp-class{
   width: 303px;

@@ -207,14 +207,29 @@
     var rubik = document.getElementById('rubiks_cube')
     if(rubik.className.indexOf('rubik-fast')==-1)
       rubik.className += ' rubik-fast'
+    var begin_len = rotate_path.length
+    var progress_bar = document.getElementById('progress_bar')
+    if(begin_len>3){
+      progress_bar.style.opacity = 1
+    }
     ;(function(){
       if(rotate_path.length>0){
+        var percentage = (rotate_path.length-1)/begin_len
+        progress_bar.style.left = '-'+ (percentage*100).toFixed(2) +'%'
         var edge = rotate_path.pop()
         rotateArray(state, edge[1], edge[0], !edge[2], 100, arguments.callee, true)
       }else {
         document.getElementById('screen_blocker').style.zIndex = -100
         rubik.setAttribute('style', transform_prefix("rotateX("+ -10.5 +"deg) rotateY("+ -15 +"deg)"))
         rubik.className = rubik.className.replace(' rubik-fast', '')
+        if(begin_len>3){
+          setTimeout(function(){
+            progress_bar.style.opacity = 0
+            setTimeout(function(){
+              progress_bar.style.left = '-102%'
+            }, 1200)
+          },500)
+        }
       }
     })()
   })

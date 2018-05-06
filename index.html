@@ -3,18 +3,17 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <title></title>
+    <title>Rubik's Cube</title>
 
     <link rel="stylesheet" href="rubik.css">
   </head>
   <body>
-    <div class="" id="fix_screen_width" style="height: 500px;position:relative;overflow:hidden">
-    <div class="" style="position:absolute;font-size:14px;top:20px;left:10px;">
-
-    </div>
+    <div id="fix_screen_width" style="height: 500px;position:relative;overflow:hidden">
+    <div id="screen_blocker" style="position:absolute;width: 100%;height: 100%;top:0;left:0;z-index:-100"></div>
     <div class="option-group">
       <div class="btn-option" id="random_rotate"><span class="btn-option-inner">Rotate Randomly</span></div>
       <div class="btn-option" id="random_rotate_2"><span class="btn-option-inner">Rotate Incessantly</span></div>
+      <div class="btn-option" id="return_origin"><span class="btn-option-inner">Return Origin</span></div>
       <div class="btn-option">
         <div class="btn-option-inner">
           <input type="checkbox" id="colour_switch" checked='checked' class="checkbox-blocker">

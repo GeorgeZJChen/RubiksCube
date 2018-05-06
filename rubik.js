@@ -16,6 +16,7 @@
     }
 
   var id_prefix = 'isb9qalC_'
+  var rotate_path = []
   var translations = [
                         [-1, -1, 1], //1
                         [0, -1, 1],
@@ -153,13 +154,11 @@
   document.getElementById('random_rotate').addEventListener('click', function(){
     rotate_cubies(['x','y','z'][Math.floor(Math.random()*3)],
     Math.floor(Math.random()*3)+1, Math.floor(Math.random()*2))
-    // rotateArray(state, Math.floor(Math.random()*3)+1, ['x','y','z'][Math.floor(Math.random()*3)], Math.floor(Math.random()*2))
     return
   })
   document.getElementById('random_rotate_2').addEventListener('click', function(){
     rotate_position(['x','y','z'][Math.floor(Math.random()*3)],
     Math.floor(Math.random()*3)+1, Math.floor(Math.random()*2))
-    // rotateArray(state, Math.floor(Math.random()*3)+1, ['x','y','z'][Math.floor(Math.random()*3)], Math.floor(Math.random()*2))
     return
   })
   document.getElementById('random_rotate_2').addEventListener('mousedown', function(){
@@ -179,7 +178,6 @@
       Math.floor(Math.random()*3)+1, Math.floor(Math.random()*2))
       setTimeout(arguments.callee, 200)
     })()
-    // rotateArray(state, Math.floor(Math.random()*3)+1, ['x','y','z'][Math.floor(Math.random()*3)], Math.floor(Math.random()*2))
     return
   })
   document.getElementById('random_rotate_2').addEventListener('touchstart', function(){
@@ -201,8 +199,24 @@
       Math.floor(Math.random()*3)+1, Math.floor(Math.random()*2))
       setTimeout(arguments.callee, 200)
     })()
-    // rotateArray(state, Math.floor(Math.random()*3)+1, ['x','y','z'][Math.floor(Math.random()*3)], Math.floor(Math.random()*2))
     return
+  })
+  document.getElementById('return_origin').addEventListener('click', function(){
+    if(rotating == true) return
+    document.getElementById('screen_blocker').style.zIndex = 100
+    var rubik = document.getElementById('rubiks_cube')
+    if(rubik.className.indexOf('rubik-fast')==-1)
+      rubik.className += ' rubik-fast'
+    ;(function(){
+      if(rotate_path.length>0){
+        var edge = rotate_path.pop()
+        rotateArray(state, edge[1], edge[0], !edge[2], 100, arguments.callee, true)
+      }else {
+        document.getElementById('screen_blocker').style.zIndex = -100
+        rubik.setAttribute('style', transform_prefix("rotateX("+ -10.5 +"deg) rotateY("+ -15 +"deg)"))
+        rubik.className = rubik.className.replace(' rubik-fast', '')
+      }
+    })()
   })
 
   var control_area = document.getElementById('rotate_control_area')
@@ -279,6 +293,7 @@
     var direction
     var axis
     var which
+    var cubies = []
 
     var move = function (e) { //mousemove
       try {
@@ -351,11 +366,11 @@
         else
         deltaY = Math.max(deltaY, -50)
         if(stage_2.indexOf('x')!=-1){
-          if(Math.abs(deltaY)<10&&Math.abs(deltaX)<45){
+          if(Math.abs(deltaY)<10&&Math.abs(deltaX)<43){
             stage_2 = 'unset'
           }
         }else {
-          if(Math.abs(deltaX)<10&&Math.abs(deltaY)<45){
+          if(Math.abs(deltaX)<10&&Math.abs(deltaY)<43){
             stage_2 = 'unset'
           }
         }
@@ -430,9 +445,9 @@
         if(_axis!=axis||_which!=which){
           axis = _axis
           which = _which
-          var cubies = document.getElementsByClassName('cubie')
           for (var i = 0; i < cubies.length; i++) {
-            cubies[i].className = cubies[i].className.replace(' cubie-selected', '')
+            if(cubies[i])
+              cubies[i].className = cubies[i].className.replace(' cubie-selected', '')
           }
           cubies = new Array()
           var rp = rotate_position(axis, which, true, true)
@@ -466,14 +481,12 @@
       document.removeEventListener("touchcancel", up, false);
       control_layer_button.removeAttribute('style')
       moved = false;
-      var cubies = document.getElementsByClassName('cubie')
       for (var i = 0; i < cubies.length; i++) {
-        cubies[i].className = cubies[i].className.replace(' cubie-selected', '')
+        if(cubies[i])
+          cubies[i].className = cubies[i].className.replace(' cubie-selected', '')
       }
       if(axis&&which){
-        if(rotating) return
-        rotating = true
-        rotate_position(axis, which, direction)
+        rotate_cubies(axis, which, direction)
       }
     };
     document.addEventListener("mousemove", move, false);
@@ -665,12 +678,14 @@
     if(position_only) return [axis, which, direction];
     rotateArray(state, which, axis, direction)
   }
-  var rotateArray = function(state, which, axis, direction){
+  var rotateArray = function(state, which, axis, direction, transition_time, cb, donotrecord){
+
+    var tt = transition_time || 600
 
     var cubies_a = select_cubies(axis, which, direction)
+    if(!donotrecord) rotate_path.push([axis, which, direction])  //record the path
     tup = [cubies_a.slice(0,4), cubies_a.slice(4,8)]
     var extra = cubies_a.pop()
-
 
     var ids = [];
     for (var k = 0; k < 2; k++) {
@@ -710,7 +725,7 @@
         setTimeout(function(){
           p.setAttribute('style', p.getAttribute('style').replace(/transition.*no;/, ''))
           rotating = false
-        },30)
+        },50)
       }
       for (var i = 0; i < cubies.length; i++) {
         var translate = translations[state.indexOf(ids[i])].slice()
@@ -747,8 +762,8 @@
 
         setTimeout_p(cubies[i])
       }
-
-    },650)
+      if(cb) cb()
+    },tt+100)
     return state
   }
   var position = [[],[],[]]

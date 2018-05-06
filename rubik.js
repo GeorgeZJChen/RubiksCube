@@ -212,12 +212,13 @@
     if(begin_len>3){
       progress_bar.style.opacity = 1
     }
+    if(begin_len == 0) return
     var first_in = true
     ;(function(){
       if(first_in){
-        progress_bar.style.left = '-100%'
         first_in = false
-        setTimeout(arguments.callee, 700)
+        progress_bar.style.left = '-100%'
+        setTimeout(arguments.callee, 600)
         return
       }
       if(rotate_path.length>0){

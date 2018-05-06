@@ -216,7 +216,6 @@
     if(begin_len>3){
       progress_bar.style.opacity = 1
     }
-    if(begin_len == 0) return
     var first_in = true
     ;(function(){
       if(first_in){

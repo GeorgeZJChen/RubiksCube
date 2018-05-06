@@ -176,7 +176,7 @@ body{
 }
 .progress-bar{
   width: 101%;
-  height: 3px;
+  height: 4px;
   position: absolute;
   z-index: -1;
   background: #7cb058;
@@ -188,7 +188,7 @@ body{
 }
 .progress-bar-head{
   width: 6px;
-  height: 3px;
+  height: 4px;
   position: absolute;
   z-index: -1;
   background: #7cb058;
